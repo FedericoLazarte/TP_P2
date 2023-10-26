@@ -26,4 +26,12 @@ public abstract class Paquete {
 	public int consultarVolumenDelPaquete() {
 		return this.volumen;
 	}
+
+	public int getId() {
+        return idPaquete;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
 }
