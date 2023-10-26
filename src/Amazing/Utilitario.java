@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 public class Utilitario extends Transporte{
 	private int valorExtra;

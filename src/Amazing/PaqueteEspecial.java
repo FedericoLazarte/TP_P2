@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 public class PaqueteEspecial extends Paquete{
 	private int porcentaje;

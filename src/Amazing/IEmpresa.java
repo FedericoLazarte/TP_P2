@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 import java.util.Map;
 
@@ -9,9 +9,9 @@ public interface IEmpresa {
 	 * datos correspondiente a todo transporte:
 	 *  - patente, 
 	 *  - volumen maximo de carga
-	 *  - valor del viaje (que cobrara a la empresa)
+	 *  - valor del viaje (que cobrará a la empresa)
 	 *  
-	 * Adem�s por ser Automovil se proporciona el dato:
+	 * Además por ser Automovil se proporciona el dato:
 	 *  - cantidad maxima de paquetes que transporta
 	 *  
 	 * Si esa patente ya esta en el sistema se debe generar una  excepcion.
@@ -20,7 +20,7 @@ public interface IEmpresa {
 	
 	/**
 	 * Registra un nuevo transporte tipo Utilitario en el sistema con los  
-	 * datos correspondiente a todo transporte y ademas:
+	 * datos correspondiente a todo transporte y además:
 	 * 
 	 *  - un valor extra que cobra a la empresa si superan los 10 paquetes.
 	 * 
@@ -40,8 +40,8 @@ public interface IEmpresa {
 	
 	/**
 	 * Se registra un nuevo pedido en el sistema proporcionando los siguientes datos:
-	 * - el nombre del cliente que lo solicita 
-	 * - su direccion 
+	 * - el nombre del cliente que lo solicita
+	 * - su dirección
 	 * - su dni
 	 * 
 	 * El sistema le asigna un numero de pedido unico y crea un carrito de ventas vacio.
@@ -95,7 +95,10 @@ public interface IEmpresa {
 	/**
 	 * quita un paquete del pedido dado su codigo unico de paquete.
 	 * 
-	 * Demostrar la complejidad en terminos de O grande.
+	 * Devuelve true si pudo quitar el paquete. 
+	 * si no lo encontró o  el pedido ya esta finalizado, devuelve false.
+	 * 
+	 * Demostrar la complejidad en terminos de O grande en el informe.
 	 */
 	public boolean quitarPaquete(int codPaquete);
 
@@ -104,33 +107,34 @@ public interface IEmpresa {
 	/**
 	 * Se registra la finalizacion de un pedido registrado en la empresa, 
 	 * dado su codigo.
+	 * Devuelve el total a pagar por el pedido.
 	 * 
-	 * Si ese codigo no esta en el sistema se debe generar una  excepcion.
+	 * Si ese codigo no esta en el sistema o ya fue finalizado se debe 
+	 * generar una excepcion.
 	 *
 	 */
-	public void cerrarPedido(int codPedido);
+	public double cerrarPedido(int codPedido);
 	
 	/**
-	 * Se registra la carga de un transporte registrado en la empresa, dada su patente.
+	 * Se solicita la carga de un transporte registrado en la empresa, dada su patente.
 	 * 
-	 * Devuelve un String con forma de listado donde cada renglon representa un 
+	 * Devuelve un String con forma de listado donde cada renglón representa un 
 	 * paquete cargado.
-	 * Cada renglon debe respetar el siguiente formato: 
+	 * Cada renglón debe respetar el siguiente formato: 
 	 *      " + [ NroPedido - codPaquete ] direccion"
 	 * por ejemplo:
 	 *      " + [ 1002 - 101 ] Gutierrez 1147"
-	 *      
-	 * Si esa patente no esta en el sistema se debe generar una  excepcion.
-	 * 
-	 * Los paquetes que se cargan deben pertenecer a pedidos que se hayan terminado.
-	 * 
-	 * Si esta finalizado y no se encontro paquetes a cargar devuelve [].
 	 *
+	 * Los paquetes que se cargan deben pertenecer a pedidos finaizados.
+	 * Si no se encontró ningún paquete para cargar, se debe devolver un string vacio.
+	 * 
+	 * Si esa patente no esta en el sistema se debe generar una  excepcion. 
+	 * 
 	 */
 	public String cargarTransporte(String patente);
 	
 	/**
-	 * Se registra el costo del viaje de un transporte dado su patente
+	 * Se solicita el costo del viaje de un transporte dado su patente
 	 * Este costo es el que cobra el transporte (a la empresa) por entregar 
 	 * la carga una vez que fue cargado con los paquetes.
 	 * 
@@ -156,25 +160,26 @@ public interface IEmpresa {
 	 * 
 	 */
 	public Map<Integer,String> pedidosNoEntregados();
-	
+
 	/**
 	 * Devuelve la suma del precio facturado de todos los pedidos cerrados.
-	 * Si el tipo de servicio es invalido, debe generar una excepcion.
 	 * 
 	 * Se debe realizar esta operacion en O(1).
 	 */
 	public double facturacionTotalPedidosCerrados();
-
+	
 	/**
 	 * Se consideran transportes identicos a 2 transportes cargados con:
 	 *   - distinta patente, 
 	 *   - mismo tipo y 
 	 *   - la misma carga.
-	 * Se considera misma carga al tener la misma cantidad de paquetes con las mismas caracteristicas:
+	 * Se considera misma carga al tener la misma cantidad de paquetes con las 
+	 * mismas caracteristicas:
 	 *   - mismo volumen, 
-	 *   - misma clase y 
-	 *   - mismo costoDeEnvio.
-	 * poner ejemplo en algun lado.
+	 *   - mismo tipo 
+	 *   - mismo precio y
+	 *   - mismos atributos según el tipo de Paquete
+	 *   VER EJEMPLO EN ENUNCIADO
 	 */
 	public boolean hayTransportesIdenticos();
 

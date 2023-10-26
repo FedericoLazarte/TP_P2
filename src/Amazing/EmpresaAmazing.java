@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -59,9 +59,9 @@ public class EmpresaAmazing implements IEmpresa{
 	}
 
 	@Override
-	public void cerrarPedido(int codPedido) {
+	public double cerrarPedido(int codPedido) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override

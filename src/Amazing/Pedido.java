@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 import java.util.HashSet;
 

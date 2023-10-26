@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 public class Cliente {
 	private String nombre;

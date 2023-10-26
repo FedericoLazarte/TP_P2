@@ -1,7 +1,5 @@
 package Amazing;
 
-import modelos.EmpresaAmazing;
-
 public class Main {
 
 	public static void main(String[] args) {

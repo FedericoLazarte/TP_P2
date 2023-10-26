@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 public class PaqueteOrdinario extends Paquete{
 	private int constoEnvio;

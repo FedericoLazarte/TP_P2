@@ -1,4 +1,4 @@
-package modelos;
+package Amazing;
 
 public abstract class Paquete {
 	private int idPaquete = 0;

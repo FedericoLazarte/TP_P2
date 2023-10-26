@@ -1,11 +1,11 @@
-package modelos;
+package Amazing;
 
-public class Automovil extends Transporte{
-	private int limiteDePaquetes;
+public class Camion extends Transporte{
+	private int valorAdicionalPorPaquetes;
 
-	public Automovil(String patente, int capacidadVolumenTotal, int precioPorViaje, int limiteDePaquetes) {
+	public Camion(String patente, int capacidadVolumenTotal, int precioPorViaje, int valorAdicionalPorPaquetes) {
 		super(patente, capacidadVolumenTotal, precioPorViaje);
-		this.limiteDePaquetes = limiteDePaquetes;
+		this.valorAdicionalPorPaquetes = valorAdicionalPorPaquetes;
 	}
 
 	@Override
