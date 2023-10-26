@@ -21,15 +21,19 @@ public class Pedido {
 		return this.codigoPedido;
 	}
 	
-	public void agregarPaqueteAlCarrito(Paquete paquete) {
+	public void agregarPaqueteAlCarrito(Paquete paquete) throws Exception {
 		if (!pedidoCerrado) {
-            carritoDeCompras.add(paquete);
-        } else {
-            System.out.println("No se pueden agregar paquetes a un pedido cerrado.");
-        }
+	        if (carritoDeCompras.contains(paquete)) {
+	            throw new Exception("El paquete ya está en el carrito.");
+	        } else {
+	            carritoDeCompras.add(paquete);
+	        }
+	    } else {
+	        throw new Exception("No se pueden agregar paquetes a un pedido cerrado.");
+	    }
 	}
 	
-	public void eliminarPaqueteDelCarrito(int idPaquete) {
+	public void eliminarPaqueteDelCarrito(int idPaquete) throws Exception {
 		if (!pedidoCerrado) {
             Iterator<Paquete> iterator = carritoDeCompras.iterator();
             while (iterator.hasNext()) {
@@ -39,7 +43,7 @@ public class Pedido {
                 }
             }
         } else {
-            System.out.println("No se pueden eliminar paquetes de un pedido cerrado.");
+            throw new Exception("No se pueden eliminar paquetes de un pedido cerrado.");
         }
 	}
 	
@@ -47,11 +51,11 @@ public class Pedido {
 		return this.pedidoCerrado;
 	}
 	
-	public void cerrarPedido() {
+	public void cerrarPedido() throws Exception {
 		if (!pedidoCerrado) {
             pedidoCerrado = true;
         } else {
-            System.out.println("El pedido ya está cerrado.");
+        	throw new Exception("El pedido ya está cerrado.");
         }
 	}
 	
