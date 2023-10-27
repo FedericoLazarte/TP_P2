@@ -82,17 +82,16 @@ public class EmpresaAmazing implements IEmpresa{
 
 	@Override
 	public boolean quitarPaquete(int codPaquete) {
-		for(Pedido pedido : this.pedidos) {
-			if(pedidoFinalizado(pedido.consultarNumeroPedido()))
-				return false;
-			if(!pedido.estaPaqueteEnElCarrito(codPaquete))
-				return false;
-			pedido.eliminarPaqueteDelCarrito(codPaquete);
-			return true;
-			
-		}
-		return false;
+	    for (Pedido pedido : this.pedidos) {
+	        if (!pedido.consultarSiElPedidoEstaCerrado()) {
+	            if (pedido.eliminarPaqueteDelCarrito(codPaquete)) {
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
+
 
 	@Override
 	public double cerrarPedido(int codPedido) {
@@ -168,6 +167,8 @@ public class EmpresaAmazing implements IEmpresa{
 		Pedido pedido = damePedido(idPedido);
 		return pedido.consultarSiElPedidoEstaCerrado();
 	}
+	
+	
 	
 	
 }

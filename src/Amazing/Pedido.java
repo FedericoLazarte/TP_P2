@@ -32,7 +32,7 @@ public class Pedido {
 		this.carritoDeCompras.add(paquete);
 	}
 	
-	public void eliminarPaqueteDelCarrito(int idPaquete) {
+	public boolean eliminarPaqueteDelCarrito(int idPaquete) {
 	    if (pedidoCerrado) {
 	        throw new RuntimeException("No se puede eliminar paquetes de un pedido cerrado");
 	    }
@@ -42,7 +42,7 @@ public class Pedido {
 	        throw new RuntimeException("El paquete no se encuentra en el carrito");
 	    }
 
-	    carritoDeCompras.remove(paquete);
+	    return carritoDeCompras.remove(paquete);
 	}
 
 	
@@ -50,6 +50,9 @@ public class Pedido {
 		return this.pedidoCerrado;
 	}
 	
+	public HashSet<Paquete> verCarritoDeCompras() {
+		return this.carritoDeCompras;
+	}
 	public void cerrarPedido() {
 		if (!pedidoCerrado) {
             pedidoCerrado = true;
@@ -98,9 +101,3 @@ public class Pedido {
 	}
 }
 
-/*
-Un Iterator es una interfaz en Java que se utiliza para recorrer elementos en una 
-colección (como un HashSet, ArrayList, HashMap, entre otros). Su principal propósito
-es proporcionar un medio para acceder a los elementos de una colección de manera 
-secuencial, sin exponer la estructura interna de la colección.
-*/
