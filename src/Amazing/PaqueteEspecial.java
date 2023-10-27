@@ -12,7 +12,7 @@ public class PaqueteEspecial extends Paquete{
 
 	@Override
 	public int totalAPagar() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

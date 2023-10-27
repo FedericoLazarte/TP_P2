@@ -18,31 +18,28 @@ public class EmpresaAmazing implements IEmpresa{
 
 	@Override
 	public void registrarAutomovil(String patente, int volMax, int valorViaje, int maxPaq) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void registrarUtilitario(String patente, int volMax, int valorViaje, int valorExtra) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void registrarCamion(String patente, int volMax, int valorViaje, int adicXPaq) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int registrarPedido(String cliente, String direccion, int dni) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int agregarPaquete(int codPedido, int volumen, int precio, int costoEnvio) {
-		// TODO Auto-generated method stub
+	
 		return 0;
 	}
 
@@ -93,5 +90,7 @@ public class EmpresaAmazing implements IEmpresa{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 
 }

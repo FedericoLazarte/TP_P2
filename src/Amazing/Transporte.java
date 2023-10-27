@@ -23,15 +23,31 @@ public abstract class Transporte {
 	
 	public abstract void cargarPaquete(Paquete paquete);
 	
-	public abstract void quitarPaquete(int idPauqete);
+	public abstract void quitarPaquete(int idPaquete);
 	
-	public HashSet<Paquete> listadoDePaquetesCargados() {
-		HashSet<Paquete> ejem = new HashSet<>();
-		return ejem;
+	public  boolean paqueteYaEstaCargado(int idPaquete) {
+		for(Paquete paquete : this.paquetesCargados) {
+			if (paquete.verIdPaquete() == idPaquete)
+				return true;
+		}
+		return false;
+	}
+	
+	public HashSet<Paquete> cargamento() {
+		return this.paquetesCargados;
 	}
 	
 	public HashSet<Paquete> listadoDePaquetesNoEntregados() {
-		HashSet<Paquete> ejem = new HashSet<>();
-		return ejem;
+		HashSet<Paquete> paquetesNoEntregados = new HashSet<>();
+		for(Paquete paqueteNoEntregado : this.paquetesCargados) {
+			if (!paqueteNoEntregado.consultarSiElPaqueteFueEntregado()) {
+				paquetesNoEntregados.add(paqueteNoEntregado);
+			}
+		}
+		return paquetesNoEntregados;
+	}
+	
+	public int totalDePaquetesCargados() {
+		return this.paquetesCargados.size();
 	}
 }

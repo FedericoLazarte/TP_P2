@@ -1,5 +1,7 @@
 package Amazing;
 
+import java.util.Objects;
+
 public abstract class Paquete {
 	private int idPaquete = 0;
 	private int volumen;
@@ -26,4 +28,31 @@ public abstract class Paquete {
 	public int consultarVolumenDelPaquete() {
 		return this.volumen;
 	}
+
+	public int verIdPaquete() {
+        return idPaquete;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+    
+    @Override
+    public boolean equals(Object otroPaquete) {
+        if (this == otroPaquete) {
+            return true;
+        }
+        if (otroPaquete == null || getClass() != otroPaquete.getClass()) {
+            return false;
+        }
+        Paquete paquete = (Paquete) otroPaquete;
+        return volumen == paquete.volumen &&
+               precio == paquete.precio;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(volumen, precio);
+    }
+
 }

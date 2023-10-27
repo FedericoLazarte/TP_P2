@@ -21,9 +21,11 @@ public class Camion extends Transporte{
 	}
 
 	@Override
-	public void quitarPaquete(int idPauqete) {
+	public void quitarPaquete(int idPaquete) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
