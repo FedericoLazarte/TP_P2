@@ -4,14 +4,18 @@ public class Camion extends Transporte{
 	private int valorAdicionalPorPaquetes;
 
 	public Camion(String patente, int capacidadVolumenTotal, int precioPorViaje, int valorAdicionalPorPaquetes) {
-		super(patente, capacidadVolumenTotal, precioPorViaje);
-		this.valorAdicionalPorPaquetes = valorAdicionalPorPaquetes;
+	    super(patente, capacidadVolumenTotal, precioPorViaje);
+	    this.valorAdicionalPorPaquetes = valorAdicionalPorPaquetes;
 	}
 
 	@Override
 	public int costoTotalPorViaje() {
-		return (super.totalDePaquetesCargados() * this.valorAdicionalPorPaquetes) + super.verPrecioPorViaje();
+	    if (totalDePaquetesCargados() == 0) {
+	        throw new RuntimeException("El transporte no está cargado");
+	    }
+	    return (totalDePaquetesCargados() * this.valorAdicionalPorPaquetes) + super.verPrecioPorViaje();
 	}
+
 
 	@Override
 	public void cargarPaquete(Paquete paquete) {
@@ -41,5 +45,4 @@ public class Camion extends Transporte{
 	private boolean esValidoElVolumenDelPaquete(Paquete paquete) {
 		return paquete.consultarVolumenDelPaquete() > 2000;
 	}
-
 }

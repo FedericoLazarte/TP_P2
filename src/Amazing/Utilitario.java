@@ -10,8 +10,10 @@ public class Utilitario extends Transporte{
 
 	@Override
 	public int costoTotalPorViaje() {
-		// TODO Auto-generated method stub
-		return 0;
+	    if (totalDePaquetesCargados() == 0) {
+	        throw new RuntimeException("El transporte no está cargado");
+	    }
+	    return (totalDePaquetesCargados()) + super.verPrecioPorViaje();
 	}
 
 	@Override

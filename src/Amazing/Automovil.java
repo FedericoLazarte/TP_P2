@@ -12,9 +12,12 @@ public class Automovil extends Transporte{
 
 	@Override
 	public int costoTotalPorViaje() {
-		// TODO Auto-generated method stub
-		return super.verPrecioPorViaje();
+	    if (totalDePaquetesCargados() == 0) {
+	        throw new RuntimeException("El transporte no está cargado");
+	    }
+	    return (totalDePaquetesCargados()) + super.verPrecioPorViaje();
 	}
+
 
 	@Override
 	public void cargarPaquete(Paquete paquete) {

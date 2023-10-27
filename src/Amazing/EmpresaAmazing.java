@@ -18,6 +18,16 @@ public class EmpresaAmazing implements IEmpresa {
 		this.pedidos = new ArrayList<>();
 		this.facturacionTotalPedidosCerrados = 0;
 	}
+	
+	private Transporte obtenerTransporte(String patente) {
+	    for (Transporte transporte : transportes) {
+	        if (transporte.consultarPatente().equals(patente)) {
+	            return transporte;
+	        }
+	    }
+	    return null;
+	}
+
 
 	@Override
 	public void registrarAutomovil(String patente, int volMax, int valorViaje, int maxPaq) {
@@ -113,44 +123,35 @@ public class EmpresaAmazing implements IEmpresa {
 
 	@Override
 	public String cargarTransporte(String patente) {
-		Transporte transporte = buscarTransportePorPatente(patente);
+	    Transporte transporte = obtenerTransporte(patente);
+	    if (transporte == null) {
+	        throw new RuntimeException("El transporte no está cargado.");
+	    }
 
-		if (transporte == null) {
-			throw new RuntimeException("La patente del transporte no está registrada.");
-		}
-
-		StringBuilder listadoPaquetesCargados = new StringBuilder();
-
-		for (Pedido pedido : this.pedidos) {
-			if (pedido.consultarSiElPedidoEstaCerrado()) {
-				HashSet<Paquete> carritoDeCompras = pedido.verCarritoDeCompras();
-
-				for (Paquete paquete : carritoDeCompras) {
-					listadoPaquetesCargados.append(" + [ ").append(pedido.consultarNumeroPedido()).append(" - ")
-							.append(paquete.verIdPaquete()).append(" ] ")
-							.append(pedido.verCliente().consultarDireccionCliente()).append("\n");
-					// transporte.cargarPaquete(paquete);
-				}
-			}
-		}
-
-		return listadoPaquetesCargados.toString();
+	    if (transporte.estaCargado()) {
+	        return "Transporte cargado\n";
+	    } else {
+	        return "Transporte vacío\n";
+	    }
 	}
+
+
 
 	@Override
 	public double costoEntrega(String patente) {
-		Transporte transporte = buscarTransportePorPatente(patente);
+	    Transporte transporte = buscarTransportePorPatente(patente);
 
-		if (transporte == null) {
-			throw new RuntimeException("La patente del transporte no está registrada.");
-		}
+	    if (transporte == null) {
+	        throw new RuntimeException("La patente del transporte no está registrada.");
+	    }
 
-		if (!transporte.estaCargado()) {
-			throw new RuntimeException("El transporte no está cargado.");
-		}
+	    if (!transporte.estaCargado()) {
+	        throw new RuntimeException("El transporte no está cargado.");
+	    }
 
-		return transporte.costoTotalPorViaje();
+	    return transporte.costoTotalPorViaje();
 	}
+
 
 	@Override
 	public Map<Integer, String> pedidosNoEntregados() {

@@ -14,7 +14,7 @@ public abstract class Transporte {
 		this.patente = patente;
 		this.capacidadVolumenTotal = capacidadVolumenTotal;
 		this.precioPorViaje = precioPorViaje;
-		this.paquetesCargados = new HashSet<>();
+		this.setPaquetesCargados(new HashSet<>());
 	}
 	
 	public abstract int costoTotalPorViaje();
@@ -23,7 +23,7 @@ public abstract class Transporte {
 	
 	public void quitarPaquete(int idPaquete) {
 		if(paqueteYaEstaCargado(idPaquete)) {
-			Iterator<Paquete> iterator = this.paquetesCargados.iterator();
+			Iterator<Paquete> iterator = this.getPaquetesCargados().iterator();
 			while(iterator.hasNext()) {
 				Paquete paquete = iterator.next();
 				if(paquete.verIdPaquete() == idPaquete) {
@@ -45,7 +45,7 @@ public abstract class Transporte {
 	}
 	
 	public  boolean paqueteYaEstaCargado(int idPaquete) {
-		for(Paquete paquete : this.paquetesCargados) {
+		for(Paquete paquete : this.getPaquetesCargados()) {
 			if (paquete.verIdPaquete() == idPaquete)
 				return true;
 		}
@@ -53,12 +53,12 @@ public abstract class Transporte {
 	}
 	
 	public HashSet<Paquete> cargamento() {
-		return this.paquetesCargados;
+		return this.getPaquetesCargados();
 	}
 	
 	public HashSet<Paquete> listadoDePaquetesNoEntregados() {
 		HashSet<Paquete> paquetesNoEntregados = new HashSet<>();
-		for(Paquete paqueteNoEntregado : this.paquetesCargados) {
+		for(Paquete paqueteNoEntregado : this.getPaquetesCargados()) {
 			if (!paqueteNoEntregado.consultarSiElPaqueteFueEntregado()) {
 				paquetesNoEntregados.add(paqueteNoEntregado);
 			}
@@ -67,12 +67,13 @@ public abstract class Transporte {
 	}
 	
 	public int totalDePaquetesCargados() {
-		return this.paquetesCargados.size();
+		return this.getPaquetesCargados().size();
 	}
 	
 	public boolean estaCargado() {
-	    return !paquetesCargados.isEmpty();
+	    return !getPaquetesCargados().isEmpty();
 	}
+
 
 	
 	@Override
@@ -84,12 +85,20 @@ public abstract class Transporte {
         Transporte transporte = (Transporte) otroTransporte;
         return !patente.equals(transporte.patente) &&
                getClass().equals(transporte.getClass()) &&  
-               paquetesCargados.equals(transporte.paquetesCargados);  
+               getPaquetesCargados().equals(transporte.getPaquetesCargados());  
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getClass(), paquetesCargados);
+        return Objects.hash(getClass(), getPaquetesCargados());
     }
+
+	public HashSet<Paquete> getPaquetesCargados() {
+		return paquetesCargados;
+	}
+
+	public void setPaquetesCargados(HashSet<Paquete> paquetesCargados) {
+		this.paquetesCargados = paquetesCargados;
+	}
 
 }
