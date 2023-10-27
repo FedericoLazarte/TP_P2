@@ -3,13 +3,14 @@ package Amazing;
 import java.util.Objects;
 
 public abstract class Paquete {
-	private int idPaquete = 0;
+    private static int proximoIdPaquete = 1;
+	private int idPaquete;
 	private int volumen;
 	private int precio;
 	private boolean entregado;
 	
 	public Paquete(int volumen, int precio) {
-		this.idPaquete = this.idPaquete++;
+		this.idPaquete = proximoIdPaquete++;
 		this.volumen = volumen;
 		this.precio = precio;
 		this.entregado = false;
@@ -22,7 +23,10 @@ public abstract class Paquete {
 	}
 	
 	public void marcarComoPaqueteEntregado() {
-		this.entregado = true;
+        if(!this.entregado)
+		    this.entregado = true;
+        else 
+            throw new RuntimeException("El paquete ya fue entregado");
 	}
 	
 	public int consultarVolumenDelPaquete() {
