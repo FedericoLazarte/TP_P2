@@ -19,13 +19,4 @@ public class Utilitario extends Transporte{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void quitarPaquete(int idPauqete) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 }

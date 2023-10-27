@@ -51,7 +51,7 @@ public abstract class Paquete {
         }
         Paquete paquete = (Paquete) otroPaquete;
         return volumen == paquete.volumen &&
-               precio == paquete.precio;
+               precio == paquete.precio && getClass().equals(paquete.getClass());
     }
 
     @Override

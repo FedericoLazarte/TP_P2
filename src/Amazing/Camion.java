@@ -10,22 +10,36 @@ public class Camion extends Transporte{
 
 	@Override
 	public int costoTotalPorViaje() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (super.totalDePaquetesCargados() * this.valorAdicionalPorPaquetes) + super.verPrecioPorViaje();
 	}
 
 	@Override
 	public void cargarPaquete(Paquete paquete) {
-		// TODO Auto-generated method stub
+		if (!paqueteValido(paquete)) {
+			throw new RuntimeException("Los automóviles solo transportan paquete ordinarios, y con un volumen menor a 2000");
+		}
 		
-	}
-
-	@Override
-	public void quitarPaquete(int idPaquete) {
-		// TODO Auto-generated method stub
+		if(paqueteYaEstaCargado(paquete.verIdPaquete())) {
+			throw new RuntimeException("El paquete ya se encuentra cargado");
+		}
 		
+		super.cargamento().add(paquete);
 	}
 
 	
+	
+	private boolean paqueteValido(Paquete paquete) {
+		boolean esEspecial = esUnPaqueteEspecial(paquete);
+		boolean volumenMayorA2000 = esValidoElVolumenDelPaquete(paquete);
+		return esEspecial && volumenMayorA2000;
+	}
+	
+	private boolean esUnPaqueteEspecial(Paquete paquete) {
+		return paquete instanceof PaqueteEspecial;
+	}
+	
+	private boolean esValidoElVolumenDelPaquete(Paquete paquete) {
+		return paquete.consultarVolumenDelPaquete() > 2000;
+	}
 
 }

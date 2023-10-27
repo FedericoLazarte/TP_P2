@@ -33,23 +33,6 @@ public class Automovil extends Transporte{
 		super.cargamento().add(paquete);
 	}
 
-	@Override
-	public void quitarPaquete(int idPaquete) {
-		if(paqueteYaEstaCargado(idPaquete)) {
-			Iterator<Paquete> iterator = super.cargamento().iterator();
-			while(iterator.hasNext()) {
-				Paquete paquete = iterator.next();
-				if(paquete.verIdPaquete() == idPaquete) {
-					iterator.remove();
-				}
-			}
-		} else {
-			throw new RuntimeException("El paquete no se encuentra en el cargamento");
-		}
-		
-	}
-	
-	
 	
 	private boolean paqueteValido(Paquete paquete) {
 		boolean esOrdinario = esUnPaqueteOrdinario(paquete);

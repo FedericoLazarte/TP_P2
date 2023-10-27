@@ -1,6 +1,8 @@
 package Amazing;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Objects;
 
 public abstract class Transporte {
 	private String patente;
@@ -19,7 +21,20 @@ public abstract class Transporte {
 	
 	public abstract void cargarPaquete(Paquete paquete);
 	
-	public abstract void quitarPaquete(int idPaquete);
+	public void quitarPaquete(int idPaquete) {
+		if(paqueteYaEstaCargado(idPaquete)) {
+			Iterator<Paquete> iterator = this.paquetesCargados.iterator();
+			while(iterator.hasNext()) {
+				Paquete paquete = iterator.next();
+				if(paquete.verIdPaquete() == idPaquete) {
+					iterator.remove();
+				}
+			}
+		} else {
+			throw new RuntimeException("El paquete no se encuentra en el cargamento");
+		}
+		
+	}
 	
 	public String consultarPatente( ) {
 		return this.patente;
@@ -54,4 +69,22 @@ public abstract class Transporte {
 	public int totalDePaquetesCargados() {
 		return this.paquetesCargados.size();
 	}
+	
+	@Override
+    public boolean equals(Object otroTransporte) {
+        if (this == otroTransporte) 
+        	return true;
+        if (otroTransporte == null || getClass() != otroTransporte.getClass()) 
+        	return false;
+        Transporte transporte = (Transporte) otroTransporte;
+        return !patente.equals(transporte.patente) &&
+               getClass().equals(transporte.getClass()) &&  
+               paquetesCargados.equals(transporte.paquetesCargados);  
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClass(), paquetesCargados);
+    }
+
 }
