@@ -70,6 +70,11 @@ public abstract class Transporte {
 		return this.paquetesCargados.size();
 	}
 	
+	public boolean estaCargado() {
+	    return !paquetesCargados.isEmpty();
+	}
+
+	
 	@Override
     public boolean equals(Object otroTransporte) {
         if (this == otroTransporte) 

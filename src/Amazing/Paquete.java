@@ -10,15 +10,17 @@ public abstract class Paquete {
 	private boolean entregado;
 	
 	public Paquete(int volumen, int precio) {
+		if(volumen <= 0)
+			throw new RuntimeException("El volumen no puede ser menor o igual que 0");
+		if(precio <= 0)
+			throw new RuntimeException("El precio no puede ser menor o igual que 0");
 		this.idPaquete = proximoIdPaquete++;
 		this.volumen = volumen;
 		this.precio = precio;
 		this.entregado = false;
 	}
 	
-	public  int totalAPagar() {
-		return this.precio;
-	}
+	public  abstract int totalAPagar();
 	
 	public boolean consultarSiElPaqueteFueEntregado() {
 		return this.entregado;
@@ -36,11 +38,11 @@ public abstract class Paquete {
 	}
 
 	public int verIdPaquete() {
-        return idPaquete;
+        return this.idPaquete;
     }
 
     public int getPrecio() {
-        return precio;
+        return this.precio;
     }
     
     @Override

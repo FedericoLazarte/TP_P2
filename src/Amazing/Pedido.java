@@ -46,6 +46,10 @@ public class Pedido {
 	}
 
 	
+	public Cliente verCliente() {
+		return this.cliente;
+	}
+	
 	public boolean consultarSiElPedidoEstaCerrado() {
 		return this.pedidoCerrado;
 	}
