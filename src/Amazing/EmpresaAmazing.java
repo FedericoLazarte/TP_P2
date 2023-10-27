@@ -70,13 +70,27 @@ public class EmpresaAmazing implements IEmpresa{
 
 	@Override
 	public int agregarPaquete(int codPedido, int volumen, int precio, int porcentaje, int adicional) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(!pedidoYaRegistrado(codPedido))
+			throw new RuntimeException("El pedido no se encuentra registrado");
+		if(pedidoFinalizado(codPedido))
+			throw new RuntimeException("El pedido se encuentra finalizado, no se pueden agregar más paquetes");
+		Paquete paqueteEspecial = new PaqueteEspecial(volumen, precio, porcentaje, adicional);
+		Pedido pedido = damePedido(codPedido);
+		pedido.agregarPaqueteAlCarrito(paqueteEspecial);
+		return pedido.consultarNumeroPedido();
 	}
 
 	@Override
 	public boolean quitarPaquete(int codPaquete) {
-		// TODO Auto-generated method stub
+		for(Pedido pedido : this.pedidos) {
+			if(pedidoFinalizado(pedido.consultarNumeroPedido()))
+				return false;
+			if(!pedido.estaPaqueteEnElCarrito(codPaquete))
+				return false;
+			pedido.eliminarPaqueteDelCarrito(codPaquete);
+			return true;
+			
+		}
 		return false;
 	}
 

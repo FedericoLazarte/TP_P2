@@ -25,37 +25,26 @@ public class Pedido {
 	}
 	
 	public void agregarPaqueteAlCarrito(Paquete paquete){
-		if (!pedidoCerrado) {
-	        if (estaPaqueteEnElCarrito(paquete)) {
-	            throw new RuntimeException("El paquete ya está en el carrito.");
-	        } else {
-	            carritoDeCompras.add(paquete);
-	        }
-	    } else {
-	        throw new RuntimeException("No se pueden agregar paquetes a un pedido cerrado.");
-	    }
+		if(this.pedidoCerrado)
+			throw new RuntimeException("No se pueden agregar paquetes a un pedido cerrado");
+		if(estaPaqueteEnElCarrito(paquete))
+			throw new RuntimeException("El paquete ya está en el carrito");
+		this.carritoDeCompras.add(paquete);
 	}
 	
-	public void eliminarPaqueteDelCarrito(int idPaquete) throws Exception {	
-		if(!pedidoCerrado ) {
-			Paquete paquete = buscarPaquetePorId(idPaquete);
-			if (estaPaqueteEnElCarrito(paquete)) {
-	            Iterator<Paquete> iterator = carritoDeCompras.iterator();
-	            while (iterator.hasNext()) {
-	                paquete = iterator.next();
-	                if (paquete.verIdPaquete() == idPaquete) {
-	                    iterator.remove();
-	                }
-	            }
-	        } else {
-	            throw new Exception("El paquete no se encuentra en el carrito" );
-	        }
-			
-		} else {
-			throw new RuntimeException("No se pueden eliminar paquetes de un pedido cerrado.");
-		}
-		
+	public void eliminarPaqueteDelCarrito(int idPaquete) {
+	    if (pedidoCerrado) {
+	        throw new RuntimeException("No se puede eliminar paquetes de un pedido cerrado");
+	    }
+
+	    Paquete paquete = buscarPaquetePorId(idPaquete);
+	    if (paquete == null) {
+	        throw new RuntimeException("El paquete no se encuentra en el carrito");
+	    }
+
+	    carritoDeCompras.remove(paquete);
 	}
+
 	
 	public boolean consultarSiElPedidoEstaCerrado() {
 		return this.pedidoCerrado;
@@ -72,6 +61,18 @@ public class Pedido {
 	public int totalAPagar() {
 	    return calcularTotalAPagar();
 	}
+	
+	public Paquete damePaqueteDelCarrito(int idPaquete) {
+		return buscarPaquetePorId(idPaquete);
+	}
+	
+	public boolean estaPaqueteEnElCarrito(int idPaquete) {
+		for(Paquete paquete : this.carritoDeCompras) {
+			if (paquete.verIdPaquete() == idPaquete)
+				return true;
+		}
+		return false;
+	}
 
 	private int calcularTotalAPagar() {
 		int sumaPrecios = 0;
@@ -80,6 +81,8 @@ public class Pedido {
 		}
 		return sumaPrecios;
 	}
+	
+	
 	
 	private boolean estaPaqueteEnElCarrito(Paquete paquete) {
 		return this.carritoDeCompras.contains(paquete);
