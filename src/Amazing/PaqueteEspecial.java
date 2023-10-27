@@ -31,24 +31,18 @@ public class PaqueteEspecial extends Paquete{
 	}
 	
 	@Override
-	public boolean equals(Object otroPaquete) {
-	    if (this == otroPaquete) {
-	        return true;
-	    }
-	    if (otroPaquete == null || getClass() != otroPaquete.getClass()) {
-	        return false;
-	    }
-	    if (!super.equals(otroPaquete)) {
-	        return false;
-	    }
-	    PaqueteEspecial paquete = (PaqueteEspecial) otroPaquete;
-	    return porcentaje == paquete.porcentaje && adicional == paquete.adicional;
-	}
+    public boolean equals(Object otroPaquete) {
+        if (this == otroPaquete) return true;
+        if (otroPaquete == null || getClass() != otroPaquete.getClass()) return false;
+        if (!super.equals(otroPaquete)) return false;
+        PaqueteEspecial paqueteEspecial = (PaqueteEspecial) otroPaquete;
+        return porcentaje == paqueteEspecial.porcentaje && adicional == paqueteEspecial.adicional;
+    }
 
-	@Override
-	public int hashCode() {
-	    return Objects.hash(super.hashCode(), porcentaje, adicional);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), porcentaje, adicional);
+    }
 
 
 

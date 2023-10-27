@@ -75,21 +75,19 @@ public abstract class Transporte {
 	}
 
 	
-	@Override
-    public boolean equals(Object otroTransporte) {
-        if (this == otroTransporte) 
-        	return true;
-        if (otroTransporte == null || getClass() != otroTransporte.getClass()) 
-        	return false;
-        Transporte transporte = (Transporte) otroTransporte;
-        return !patente.equals(transporte.patente) &&
-               getClass().equals(transporte.getClass()) &&  
-               paquetesCargados.equals(transporte.paquetesCargados);  
-    }
+	 @Override
+	    public boolean equals(Object otroTransporte) {
+	        if (this == otroTransporte) return true;
+	        if (otroTransporte == null || getClass() != otroTransporte.getClass()) return false;
+	        Transporte transporte = (Transporte) otroTransporte;
+	        return !patente.equals(transporte.patente) &&
+	                getClass().equals(transporte.getClass()) && 
+	                paquetesCargados.equals(transporte.paquetesCargados);
+	    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getClass(), paquetesCargados);
-    }
+	    @Override
+	    public int hashCode() {
+	        return Objects.hash(patente, paquetesCargados);
+	    }
 
 }
