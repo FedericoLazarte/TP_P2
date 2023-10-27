@@ -16,7 +16,11 @@ public class Utilitario extends Transporte{
 
 	@Override
 	public void cargarPaquete(Paquete paquete) {
-		// TODO Auto-generated method stub
+		if(paqueteYaEstaCargado(paquete.verIdPaquete())) {
+			throw new RuntimeException("El paquete ya se encuentra cargado");
+		}
+		
+		super.cargamento().add(paquete);
 		
 	}
 }
