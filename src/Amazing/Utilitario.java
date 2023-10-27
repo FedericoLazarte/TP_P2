@@ -1,5 +1,7 @@
 package Amazing;
 
+import java.util.Objects;
+
 public class Utilitario extends Transporte{
 	private int valorExtra;
 
@@ -25,4 +27,18 @@ public class Utilitario extends Transporte{
 		super.cargamento().add(paquete);
 		
 	}
+	
+	 @Override
+	    public boolean equals(Object otroTransporte) {
+	        if (this == otroTransporte) return true;
+	        if (otroTransporte == null || getClass() != otroTransporte.getClass()) return false;
+	        if (!super.equals(otroTransporte)) return false;
+	        Utilitario utilitario = (Utilitario) otroTransporte;
+	        return valorExtra == utilitario.valorExtra;
+	    }
+
+	    @Override
+	    public int hashCode() {
+	        return Objects.hash(super.hashCode(), valorExtra);
+	    }
 }

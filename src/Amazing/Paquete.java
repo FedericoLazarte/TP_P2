@@ -47,20 +47,17 @@ public abstract class Paquete {
     
     @Override
     public boolean equals(Object otroPaquete) {
-        if (this == otroPaquete) {
-            return true;
-        }
-        if (otroPaquete == null || getClass() != otroPaquete.getClass()) {
-            return false;
-        }
+        if (this == otroPaquete) return true;
+        if (otroPaquete == null || getClass() != otroPaquete.getClass()) return false;
         Paquete paquete = (Paquete) otroPaquete;
-        return volumen == paquete.volumen &&
-               precio == paquete.precio && getClass().equals(paquete.getClass());
+        return volumen == paquete.volumen && precio == paquete.precio && entregado == paquete.entregado;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(volumen, precio);
+        return Objects.hash(volumen, precio, entregado);
+    
     }
 
+    
 }

@@ -1,6 +1,7 @@
 package Amazing;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Automovil extends Transporte{
 	private int limiteDePaquetes;
@@ -55,7 +56,19 @@ public class Automovil extends Transporte{
 		return paquete.consultarVolumenDelPaquete() < 2000;
 	}
 
+	 @Override
+	    public boolean equals(Object otroTransporte) {
+	        if (this == otroTransporte) return true;
+	        if (otroTransporte == null || getClass() != otroTransporte.getClass()) return false;
+	        if (!super.equals(otroTransporte)) return false;
+	        Automovil automovil = (Automovil) otroTransporte;
+	        return limiteDePaquetes == automovil.limiteDePaquetes;
+	    }
 
+	    @Override
+	    public int hashCode() {
+	        return Objects.hash(super.hashCode(), limiteDePaquetes);
+	    }
 	
 	
 

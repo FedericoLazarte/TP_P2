@@ -21,25 +21,21 @@ public class PaqueteOrdinario extends Paquete{
 		return this.constoEnvio;
 	}
 	
-	@Override
-	public boolean equals(Object otroPaquete) {
-	    if (this == otroPaquete) {
-	        return true;
+	 @Override
+	    public boolean equals(Object otroPaquete) {
+	        if (this == otroPaquete) return true;
+	        if (otroPaquete == null || getClass() != otroPaquete.getClass()) return false;
+	        if (!super.equals(otroPaquete)) return false;
+	        PaqueteOrdinario paqueteOrdinario = (PaqueteOrdinario) otroPaquete;
+	        return constoEnvio == paqueteOrdinario.constoEnvio;
 	    }
-	    if (otroPaquete == null || getClass() != otroPaquete.getClass()) {
-	        return false;
-	    }
-	    if (!super.equals(otroPaquete)) {
-	        return false;
-	    }
-	    PaqueteOrdinario paquete = (PaqueteOrdinario) otroPaquete;
-	    return constoEnvio == paquete.constoEnvio;
-	}
 
-	@Override
-	public int hashCode() {
-	    return Objects.hash(super.hashCode(), constoEnvio);
-	}
+	    @Override
+	    public int hashCode() {
+	        return Objects.hash(super.hashCode(), constoEnvio);
+	    }
+
+
 
 
 }

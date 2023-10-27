@@ -1,5 +1,7 @@
 package Amazing;
 
+import java.util.Objects;
+
 public class Camion extends Transporte{
 	private int valorAdicionalPorPaquetes;
 
@@ -45,4 +47,19 @@ public class Camion extends Transporte{
 	private boolean esValidoElVolumenDelPaquete(Paquete paquete) {
 		return paquete.consultarVolumenDelPaquete() > 2000;
 	}
+
+	 @Override
+	    public boolean equals(Object otroTransporte) {
+	        if (this == otroTransporte) return true;
+	        if (otroTransporte == null || getClass() != otroTransporte.getClass()) return false;
+	        if (!super.equals(otroTransporte)) return false;
+	        Camion camion = (Camion) otroTransporte;
+	        return valorAdicionalPorPaquetes == camion.valorAdicionalPorPaquetes;
+	    }
+
+	    @Override
+	    public int hashCode() {
+	        return Objects.hash(super.hashCode(), valorAdicionalPorPaquetes);
+	    }
+
 }

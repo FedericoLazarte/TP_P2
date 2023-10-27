@@ -187,21 +187,21 @@ public class EmpresaAmazing implements IEmpresa {
 	
 	@Override
 	public boolean hayTransportesIdenticos() {
-	    int numTransportes = this.transportes.size();
-
+	    int numTransportes = transportes.size();
+	    
 	    for (int i = 0; i < numTransportes; i++) {
-	        Transporte transporte1 = this.transportes.get(i);
-	        
+	        Transporte transporteA = transportes.get(i);
+
 	        for (int j = i + 1; j < numTransportes; j++) {
-	            Transporte transporte2 = this.transportes.get(j);
-	            
-	            if (transporte1.equals(transporte2)) {
-	                return true;
+	            Transporte transporteB = transportes.get(j);
+
+	            if (transporteA.equals(transporteB)) {
+	                return true;  
 	            }
 	        }
 	    }
-
-	    return false;
+	    
+	    return false; 
 	}
 
 
