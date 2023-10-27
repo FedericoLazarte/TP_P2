@@ -15,15 +15,19 @@ public abstract class Transporte {
 		this.paquetesCargados = new HashSet<>();
 	}
 	
-	public String consultarPatente( ) {
-		return this.patente;
-	}
-	
 	public abstract int costoTotalPorViaje();
 	
 	public abstract void cargarPaquete(Paquete paquete);
 	
 	public abstract void quitarPaquete(int idPaquete);
+	
+	public String consultarPatente( ) {
+		return this.patente;
+	}
+	
+	public int verPrecioPorViaje() {
+		return this.precioPorViaje;
+	}
 	
 	public  boolean paqueteYaEstaCargado(int idPaquete) {
 		for(Paquete paquete : this.paquetesCargados) {

@@ -9,9 +9,8 @@ public class PaqueteOrdinario extends Paquete{
 	}
 
 	@Override
-	public int totalAPagar() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int totalAPagar() {	
+		return super.getPrecio() + this.constoEnvio;
 	}
 	
 	public int consultarCostoEnvio() {
