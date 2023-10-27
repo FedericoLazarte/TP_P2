@@ -16,7 +16,9 @@ public abstract class Paquete {
 		this.entregado = false;
 	}
 	
-	public abstract int totalAPagar();
+	public  int totalAPagar() {
+		return this.precio;
+	}
 	
 	public boolean consultarSiElPaqueteFueEntregado() {
 		return this.entregado;

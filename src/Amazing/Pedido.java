@@ -24,15 +24,15 @@ public class Pedido {
 		return this.codigoPedido;
 	}
 	
-	public void agregarPaqueteAlCarrito(Paquete paquete) throws Exception {
+	public void agregarPaqueteAlCarrito(Paquete paquete){
 		if (!pedidoCerrado) {
 	        if (estaPaqueteEnElCarrito(paquete)) {
-	            throw new Exception("El paquete ya está en el carrito.");
+	            throw new RuntimeException("El paquete ya está en el carrito.");
 	        } else {
 	            carritoDeCompras.add(paquete);
 	        }
 	    } else {
-	        throw new Exception("No se pueden agregar paquetes a un pedido cerrado.");
+	        throw new RuntimeException("No se pueden agregar paquetes a un pedido cerrado.");
 	    }
 	}
 	
@@ -61,26 +61,24 @@ public class Pedido {
 		return this.pedidoCerrado;
 	}
 	
-	public void cerrarPedido() throws Exception {
+	public void cerrarPedido() {
 		if (!pedidoCerrado) {
             pedidoCerrado = true;
         } else {
-        	throw new Exception("El pedido ya está cerrado.");
+        	throw new RuntimeException("El pedido ya está cerrado.");
         }
 	}
 	
 	public int totalAPagar() {
-	    return calcularTotalAPagar(carritoDeCompras.iterator());
+	    return calcularTotalAPagar();
 	}
 
-	private int calcularTotalAPagar(Iterator<Paquete> iterator) {
-	    if (!iterator.hasNext()) {
-	        return 0;
-	    } else {
-	        Paquete paquete = iterator.next();
-	        int precioPaquete = paquete.totalAPagar();
-	        return precioPaquete + calcularTotalAPagar(iterator);
-	    }
+	private int calcularTotalAPagar() {
+		int sumaPrecios = 0;
+		for(Paquete paq : this.carritoDeCompras) {
+			sumaPrecios += paq.totalAPagar();
+		}
+		return sumaPrecios;
 	}
 	
 	private boolean estaPaqueteEnElCarrito(Paquete paquete) {

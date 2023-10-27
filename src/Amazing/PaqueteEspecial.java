@@ -12,15 +12,16 @@ public class PaqueteEspecial extends Paquete{
 
 	@Override
 	public int totalAPagar() {
+		int sumaPorcentaje = (super.getPrecio() * (this.porcentaje/100)) + super.getPrecio();
 		if(super.consultarVolumenDelPaquete() > 5000) {
-			return super.getPrecio() + this.porcentaje + (this.adicional * 2);
+			return sumaPorcentaje + (this.adicional * 2);
 		}
 		
 		if(super.consultarVolumenDelPaquete() > 3000) {
-			return super.getPrecio() + this.porcentaje + this.adicional;
+			return sumaPorcentaje + this.adicional;
 		}
 		
-		return super.getPrecio() + this.porcentaje;	
+		return sumaPorcentaje;	
 	}
 
 }
