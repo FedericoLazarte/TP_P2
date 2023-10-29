@@ -22,21 +22,20 @@ public abstract class Transporte {
     public abstract void cargarPaquete(Paquete paquete);
     
     public void quitarPaquete(int idPaquete) {
-        if(paqueteYaEstaCargado(idPaquete)) {
+        if (paqueteYaEstaCargado(idPaquete)) {
             Iterator<Paquete> iterator = this.getPaquetesCargados().iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 Paquete paquete = iterator.next();
-                if(paquete.verIdPaquete() == idPaquete) {
+                if (paquete.verIdPaquete() == idPaquete) {
                     iterator.remove();
                 }
             }
         } else {
             throw new RuntimeException("El paquete no se encuentra en el cargamento");
         }
-        
     }
     
-    public String consultarPatente( ) {
+    public String consultarPatente() {
         return this.patente;
     }
     
@@ -44,8 +43,8 @@ public abstract class Transporte {
         return this.precioPorViaje;
     }
     
-    public  boolean paqueteYaEstaCargado(int idPaquete) {
-        for(Paquete paquete : this.getPaquetesCargados()) {
+    public boolean paqueteYaEstaCargado(int idPaquete) {
+        for (Paquete paquete : this.getPaquetesCargados()) {
             if (paquete.verIdPaquete() == idPaquete)
                 return true;
         }
@@ -58,7 +57,7 @@ public abstract class Transporte {
     
     public HashSet<Paquete> listadoDePaquetesNoEntregados() {
         HashSet<Paquete> paquetesNoEntregados = new HashSet<>();
-        for(Paquete paqueteNoEntregado : this.getPaquetesCargados()) {
+        for (Paquete paqueteNoEntregado : this.getPaquetesCargados()) {
             if (!paqueteNoEntregado.consultarSiElPaqueteFueEntregado()) {
                 paquetesNoEntregados.add(paqueteNoEntregado);
             }
@@ -74,14 +73,24 @@ public abstract class Transporte {
         return !getPaquetesCargados().isEmpty();
     }
     
+    public int consultarCapacidadDeVolumen() {
+        return capacidadVolumenTotal;
+    }
+
+    public boolean transporteVacio() {
+        return getPaquetesCargados().isEmpty();
+    }
+
     @Override
-    public boolean equals(Object otroTransporte) {
-        if (this == otroTransporte) return true;
-        if (otroTransporte == null || getClass() != otroTransporte.getClass()) return false;
-        Transporte transporte = (Transporte) otroTransporte;
-        return !patente.equals(transporte.patente) &&
-                getClass().equals(transporte.getClass()) && 
-                paquetesCargados.equals(transporte.paquetesCargados);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Transporte transporte = (Transporte) obj;
+        return consultarPatente().equals(transporte.consultarPatente()) && consultarCapacidadDeVolumen() == transporte.consultarCapacidadDeVolumen() && verPrecioPorViaje() == transporte.verPrecioPorViaje();
     }
 
     @Override
@@ -97,4 +106,3 @@ public abstract class Transporte {
         this.paquetesCargados = paquetesCargados;
     }
 }
-

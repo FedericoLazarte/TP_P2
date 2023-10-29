@@ -122,35 +122,34 @@ public class EmpresaAmazing implements IEmpresa {
 	}
 
 	@Override
-	public String cargarTransporte(String patente) {
-	    Transporte transporte = obtenerTransporte(patente);
-	    if (transporte == null) {
-	        throw new RuntimeException("El transporte no está cargado.");
-	    }
+public String cargarTransporte(String patente) {
+    Transporte transporte = obtenerTransporte(patente);
+    if (transporte == null) {
+        throw new RuntimeException("El transporte no está cargado.");
+    }
+    if (transporte.estaCargado()) {
+        return "Transporte cargado\n";
+    } else {
+        return "Transporte vacío\n";
+    }
+}
 
-	    if (transporte.estaCargado()) {
-	        return "Transporte cargado\n";
-	    } else {
-	        return "Transporte vacío\n";
-	    }
-	}
+@Override
+public double costoEntrega(String patente) {
+    Transporte transporte = obtenerTransporte(patente);
+    if (transporte == null) {
+        throw new RuntimeException("No se encontró un transporte con la patente " + patente);
+    }
 
+    if (transporte.totalDePaquetesCargados() == 0) {
+        return 0; // O puedes lanzar una excepción con un mensaje personalizado.
+    }
 
+    return transporte.costoTotalPorViaje();
+}
 
-	@Override
-	public double costoEntrega(String patente) {
-	    Transporte transporte = buscarTransportePorPatente(patente);
+	
 
-	    if (transporte == null) {
-	        throw new RuntimeException("La patente del transporte no está registrada.");
-	    }
-
-	    if (!transporte.estaCargado()) {
-	        throw new RuntimeException("El transporte no está cargado.");
-	    }
-
-	    return transporte.costoTotalPorViaje();
-	}
 
 
 	@Override

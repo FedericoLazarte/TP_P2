@@ -69,7 +69,4 @@ public class Automovil extends Transporte{
 	    public int hashCode() {
 	        return Objects.hash(super.hashCode(), limiteDePaquetes);
 	    }
-	
-	
-
 }

@@ -1,10 +1,6 @@
 package Amazing;
 
 import java.util.HashSet;
-import java.util.Iterator;
-
-import java.util.Iterator;
-
 
 public class Pedido {
 	private static int proximoCodPedido = 1;
@@ -33,18 +29,17 @@ public class Pedido {
 	}
 	
 	public boolean eliminarPaqueteDelCarrito(int idPaquete) {
-	    if (pedidoCerrado) {
-	        throw new RuntimeException("No se puede eliminar paquetes de un pedido cerrado");
-	    }
-
-	    Paquete paquete = buscarPaquetePorId(idPaquete);
-	    if (paquete == null) {
-	        throw new RuntimeException("El paquete no se encuentra en el carrito");
-	    }
-
-	    return carritoDeCompras.remove(paquete);
+		if (pedidoCerrado) {
+			throw new RuntimeException("No se puede eliminar paquetes de un pedido cerrado");
+		}
+	
+		Paquete paquete = buscarPaquetePorId(idPaquete);
+		if (paquete != null) {
+			return carritoDeCompras.remove(paquete);
+		}
+		return false; // El paquete no se encontraba en el carrito.
 	}
-
+	
 	
 	public Cliente verCliente() {
 		return this.cliente;
@@ -74,12 +69,9 @@ public class Pedido {
 	}
 	
 	public boolean estaPaqueteEnElCarrito(int idPaquete) {
-		for(Paquete paquete : this.carritoDeCompras) {
-			if (paquete.verIdPaquete() == idPaquete)
-				return true;
-		}
-		return false;
+		return carritoDeCompras.stream().anyMatch(paquete -> paquete.verIdPaquete() == idPaquete);
 	}
+	
 
 	private int calcularTotalAPagar() {
 		int sumaPrecios = 0;
